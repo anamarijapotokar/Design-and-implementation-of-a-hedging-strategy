@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber rm"] 1765211280 "rm.bcf" "rm.bbl" "rm" 1765211284 0
-  "rm.bcf" 1765211284 107256 bbb7563979c1f9afdf84ee4ba713182f "pdflatex"
+["biber rm"] 1765211280 "rm.bcf" "rm.bbl" "rm" 1765215795 0
+  "rm.bcf" 1765215795 107256 bbb7563979c1f9afdf84ee4ba713182f "pdflatex"
   (generated)
   "rm.bbl"
   "rm.blg"
   (rewritten before read)
-["pdflatex"] 1765211283 "/Users/anamariapotokar/Desktop/Risk Management/Design-and-implementation-of-a-hedging-strategy/rm.tex" "rm.pdf" "rm" 1765211284 0
-  "/Users/anamariapotokar/Desktop/Risk Management/Design-and-implementation-of-a-hedging-strategy/rm.tex" 1765211255 464 5466f1b910658f76ea9665c709acba26 ""
+["pdflatex"] 1765215795 "/Users/anamariapotokar/Desktop/Risk Management/Design-and-implementation-of-a-hedging-strategy/rm.tex" "rm.pdf" "rm" 1765215795 0
+  "/Users/anamariapotokar/Desktop/Risk Management/Design-and-implementation-of-a-hedging-strategy/rm.tex" 1765215794 464 d1039c1172bb7fef4eb3c9b6390add1f ""
   "/usr/local/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm" 1136768653 1524 4414a8315f39513458b80dfc63bff03a ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmr12.tfm" 1136768653 1288 655e228510b4c2a1abe905c368440826 ""
@@ -88,11 +88,11 @@
   "/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1680265421 4623355 b8cad38412faebe1ce5b780a45db67bd ""
   "/usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1680265411 7883480 918ef36eafab6b91b5cf0770e155a1d2 ""
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
-  "rm.aux" 1765211284 743 f562c743106460fbcfe6c22e18c6c76e "pdflatex"
+  "rm.aux" 1765215795 743 f562c743106460fbcfe6c22e18c6c76e "pdflatex"
   "rm.bbl" 1765211282 0 d41d8cd98f00b204e9800998ecf8427e "biber rm"
-  "rm.out" 1765211283 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "rm.run.xml" 1765211284 2210 4a1c8bde528814043db5d0012188e32f "pdflatex"
-  "rm.tex" 1765211255 464 5466f1b910658f76ea9665c709acba26 ""
+  "rm.out" 1765215795 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "rm.run.xml" 1765215795 2210 4a1c8bde528814043db5d0012188e32f "pdflatex"
+  "rm.tex" 1765215794 464 d1039c1172bb7fef4eb3c9b6390add1f ""
   (generated)
   "rm.aux"
   "rm.bcf"
