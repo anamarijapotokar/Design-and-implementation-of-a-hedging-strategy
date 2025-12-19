@@ -270,3 +270,7 @@ print(risk_part6)
 cat("\n--- PART 6: Hedge efficiency diagnostics (cost-change variance reduction) ---\n")
 print(eff_part6)
 
+
+
+
+

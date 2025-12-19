@@ -5,7 +5,7 @@ library(lubridate)
 
 # 1. 
 
-# We selected copper for our treding commodity. 
+# We selected copper for our trading commodity. 
 
 # Initial annual P&L data
 S_0 <- 920000000 # annual sales
@@ -60,7 +60,19 @@ cost_log_returns <- copper_data2$Log_Returns
 N <- length(cost_log_returns)
 
 set.seed(42)
-epsilon <- rnorm(N, mean = 0, sd = sd(cost_log_returns))
+epsilon <- rnorm(N, mean = 0, sd = sd(cost_log_returns)) 
+
+#---------------------------------------
+
+#Če želiš, da je korelacija res točno 0.74 / 0.92, mora biti epsilon standardni normal (sd=1), ne z sd = sd(cost_log_returns).
+#epsilon <- rnorm(N, 0, 1)
+
+#R_cost_z <- scale(cost_log_returns)[,1]   # standardiziraj returns
+#R_sales_z <- rho * R_cost_z + sqrt(1-rho^2) * epsilon
+
+# potem vrni na originalno skalo (isto sd kot cost)
+#R_sales <- as.numeric(R_sales_z) * sd(cost_log_returns)
+#--------------------------------------
 
 # New data frame to hold sales returns
 sales_returns <- data.frame(Date = copper_data2$Date)
@@ -136,6 +148,17 @@ final_data2 <- final_data %>%
     EBIT_b_rho_2 = Sales_b_rho_2 - Material_cost_t - 0.06 * Sales_b_rho_2 - 0.14 * Sales_b_rho_2 - OH
   )
 
+
+#----------------------------------------- Ker so tvoje Sales in stroški na letnem nivoju, je mean čez 12 mesecev smiselna “expected annual EBIT” ocena
+#last12 <- final_data2 %>% tail(12)
+
+#EBIT_year <- last12 %>% summarise(
+#  EBIT_a = mean(EBIT_a, na.rm = TRUE),
+#  EBIT_b_rho_1 = mean(EBIT_b_rho_1, na.rm = TRUE), 
+#  EBIT_b_rho_2 = mean(EBIT_b_rho_2, na.rm = TRUE)
+#)
+#-----------------------------------------------
+
 EBIT <- final_data2 %>%
   summarise(
     EBIT_a = mean(EBIT_a, na.rm = TRUE),
@@ -152,9 +175,22 @@ print(paste(EBIT))
 # 4. VaR and ETL (Expected Tail Loss) for EBIT
 
 alpha <- 0.05
+#---------------------------------------------
+# loss L = -EBIT. Zato je bolje, da VaR/ETL računaš na L, nato pa (če želiš) pretvoriš nazaj v EBIT.
 
-# loss L = -EBIT
+#var_etl_loss_from_ebit <- function(ebit_vec, alpha = 0.05) {
+#  ebit_vec <- ebit_vec[!is.na(ebit_vec)]
+#  L <- -ebit_vec
+#  
+#  VaR_L <- as.numeric(quantile(L, probs = 1 - alpha))         # 95% VaR of loss
+#  ETL_L <- mean(L[L >= VaR_L], na.rm = TRUE)                  # tail mean of loss
+#  
+# tibble(alpha = alpha, VaR_L = VaR_L, ETL_L = ETL_L,
+#         VaR_EBIT = -VaR_L, ETL_EBIT = -ETL_L)
+#}
 
+# Zakaj tako: “slab rep” za EBIT je spodaj, “slab rep” za loss je zgoraj.
+#-------------------------------------------
 ebit_var_etl <- function(ebit_vec, alpha = 0.05) {
   ebit_vec <- ebit_vec[!is.na(ebit_vec)]
 
@@ -177,3 +213,4 @@ risk_table <- bind_rows(
 
 risk_table_m <- risk_table %>%
   mutate(across(c(EBIT_VaR, EBIT_ETL), ~ .x/1e6))
+

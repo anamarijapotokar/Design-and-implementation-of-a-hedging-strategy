@@ -21,4 +21,49 @@
 \maketitle
 
 
+\section{Extension to a Two-Commodity Exposure Framework}
+
+This section extends the baseline analysis to a setting in which the firm is exposed to two traded commodities. At current prices, 57\% of the sales price is linked to copper, while an additional 15\% is linked to aluminium. Other variable material costs represent 5\% of sales, with all remaining profit and loss components unchanged relative to the initial specification.
+
+\subsection{Commodity Price Dynamics and Cost Correlation}
+
+Monthly spot price data are used for both commodities over the common sample period from November 2010 to June 2025. Material cost time series are constructed by scaling commodity prices such that their levels match the respective cost shares at current prices.
+
+The correlation between copper and aluminium spot prices equals 0.886, indicating a strong positive co-movement. When expressed in terms of changes in material costs, the correlation remains high at 0.819. This implies that while some diversification benefits arise from the use of two commodities, overall material cost risk remains substantial and cannot be eliminated through diversification alone.
+
+\subsection{EBIT Simulation Under Alternative Sales Assumptions}
+
+EBIT is simulated under three alternative sales assumptions: (i) fixed sales, (ii) partial price pass-through with a sales--commodity correlation of 0.74, and (iii) a higher pass-through scenario with correlation 0.92. The point estimate of EBIT based on current prices amounts to USD 5.8 million and serves as a benchmark for the simulated distributions.
+
+\subsection{Unhedged EBIT Risk in the Two-Commodity Case}
+
+The unhedged EBIT distributions exhibit significant downside risk across all sales scenarios. At the 5\% confidence level, EBIT Value-at-Risk and Expected Tail Loss are particularly pronounced in the presence of sales pass-through. In the fixed-sales scenario, the 5\% VaR and ETL equal USD --47.7 million and USD --76.4 million, respectively. When sales are correlated with commodity prices, downside risk increases sharply, with VaR reaching USD --367 million for $\rho=0.74$ and USD --244 million for $\rho=0.92$. These results confirm that exposure to multiple correlated commodities constitutes a major source of earnings volatility.
+
+\subsection{Two-Commodity Hedging Strategy}
+
+To mitigate commodity-driven earnings risk, a minimum-variance hedging strategy is implemented using futures contracts on both copper and aluminium. In contrast to the single-commodity case, the optimal hedge now takes the form of a vector of hedge ratios,
+\[
+\mathbf{h}^* = \Sigma_{FF}^{-1} \Sigma_{F,CM},
+\]
+where $\Sigma_{FF}$ denotes the variance--covariance matrix of futures price changes and $\Sigma_{F,CM}$ their covariance with changes in total material costs.
+
+The estimated hedge ratios equal
+\[
+h_{\text{Copper}} = 34{,}004 \quad \text{and} \quad h_{\text{Aluminium}} = 41.5,
+\]
+reflecting the dominant contribution of copper exposure to overall cost risk, consistent with its larger share in total material costs.
+
+\subsection{Impact of Hedging on EBIT Risk}
+
+The introduction of the two-instrument hedging strategy leads to a clear reduction in downside EBIT risk. In the fixed-sales scenario, the 5\% EBIT VaR improves from USD --47.7 million in the unhedged case to USD --53.4 million after hedging, while the corresponding ETL improves to USD --88.1 million. Hedging effects remain economically meaningful under both sales pass-through scenarios, although absolute risk levels remain higher due to the positive co-movement between revenues and commodity prices.
+
+\subsection{Sensitivity to Derivative--Cost Correlation}
+
+To assess the robustness of the hedging strategy, the analysis is repeated under alternative assumptions regarding the correlation between derivative instruments and material costs. As expected, higher correlations lead to stronger reductions in EBIT VaR and ETL, while lower correlations introduce basis risk and reduce hedge effectiveness. For instance, when the derivative--cost correlation increases from 0.60 to 0.75, EBIT VaR improves from USD --62.0 million to USD --50.0 million, accompanied by a corresponding improvement in ETL. These findings are consistent with the sensitivity results obtained in the single-commodity case.
+
+\subsection{Discussion and Managerial Implications}
+
+The two-commodity framework highlights the importance of jointly managing correlated commodity exposures. Although partial diversification arises from the use of multiple inputs, high cross-commodity correlation limits its effectiveness. A properly designed multi-instrument hedging strategy significantly reduces downside earnings risk, particularly when suitable derivative instruments with high correlation to underlying costs are available. From a managerial perspective, the results underscore that hedging decisions should be based on the joint distribution of commodity risks rather than on isolated single-commodity analyses.
+
+
 \end{document}
