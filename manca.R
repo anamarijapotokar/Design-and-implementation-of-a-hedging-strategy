@@ -195,10 +195,9 @@ names(h_star) <- c("h_Copper", "h_Aluminium")
 print(h_star)
 
 
-
 dfH <- dfH %>%
   mutate(
-    hedgePnL <- h_star[1]*dfH$dF_Cu + h_star[2]*dfH$dF_Al,
+    HedgePnL <- h_star[1]*dfH$dF_Cu + h_star[2]*dfH$dF_Al,
     EBIT_a_h      = EBIT_a      + HedgePnL,
     EBIT_b_r074_h = EBIT_b_r074 + HedgePnL,
     EBIT_b_r092_h = EBIT_b_r092 + HedgePnL
@@ -253,3 +252,23 @@ risk_9_6 <- bind_rows(results_9_6) %>%
 
 print(risk_9_6)
 
+
+#----Poročilo izračuni
+cor(c1$Price_USD, c2$Price_USD, use = "complete.obs")
+cor(
+  diff(df9$CM1_t),
+  diff(df9$CM2_t),
+  use = "complete.obs"
+)
+paste(
+  "Sample period:",
+  format(min(df9$Date)),
+  "-",
+  format(max(df9$Date))
+)
+
+risk_unhedged_9 %>%
+  mutate(case = paste(case, "(two-commodity)"))
+
+risk_unhedged_9 %>%
+  mutate(case = paste(case, "(two-commodity)"))
