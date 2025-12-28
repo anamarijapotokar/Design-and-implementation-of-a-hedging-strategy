@@ -9,6 +9,8 @@
 \usepackage{csquotes}
 \usepackage{biblatex}
 \usepackage{array}
+\usepackage{amsmath}
+\usepackage{amssymb}
 \titlelabel{\thetitle.\quad}
 \geometry{a4paper, margin=2.5cm}
 
@@ -20,6 +22,214 @@
 
 \maketitle
 
+% 1.-4. naloga
+
+\section{Commodity selection and material cost modelling}
+The company under consideration is a US-based non-financial firm whose production process is highly exposed to fluctuations in commodity prices. At current prices, the cost of the core input material represents approximately 69\% of the final product price, making commodity price risk the dominant source of operating risk. As a first step, an appropriate traded commodity must therefore be selected to proxy the dynamics of the company’s input costs.
+
+\subsection{Choice of commodity and data}
+Copper was selected as the reference commodity. This choice is economically justified as copper is a widely traded industrial metal, commonly used as an input in manufacturing processes, and exhibits substantial price volatility. Copper spot prices quoted in USD were obtained from a publicly available data source (index mundi) at monthly frequency, covering the period from December 2010 to June 2025. Using spot prices is consistent with the objective of capturing the underlying commodity price dynamics that affect the firm’s cost base.
+
+Let $P_t^{Cu}$ denote the spot price of copper at time $t$.
+
+\subsection{Mapping commodity prices to material costs}
+
+At current prices, annual sales of the company amount to USD 920 million. Given that the core material represents 69\% of the sales price, the current annual material cost is
+\[
+CM_0 = 0.69 \times 920\,\text{million USD} = 634{,}8\, \text{million USD}.
+\]
+
+To link historical copper prices to the firm’s material costs, we assume a linear relationship between the commodity price and the cost of materials. Specifically, the material cost at time $t$ is modelled as
+\[
+CM_t = k \cdot P_t^{Cu},
+\]
+where the scaling factor $k$ represents the effective quantity of copper embedded in annual production. The parameter $k$ is calibrated such that the material cost at the current copper price matches the observed current material cost:
+\[
+k = \frac{CM_0}{P_0^{Cu}} = 64544{,}53,
+\]
+where $P_0^{Cu} = 9835{,}07$ is the most recent observed copper price.
+
+This calibration ensures that the constructed material cost series is fully consistent with the company’s current profit and loss statement while preserving the historical dynamics of copper prices.
+
+\subsection{Commodity price dynamics}
+
+To analyse risk and to support later modelling steps, logarithmic returns of copper prices were computed as
+\[
+r_t^{Cu} = \ln(P_t^{Cu}) - \ln(P_{t-1}^{Cu}).
+\]
+Since the material cost is a linear transformation of the copper price, monthly logarithmic returns of copper prices are computed, as risk measurement and hedging effectiveness depend on price changes rather than price levels. Log returns are used due to their additive properties over time, which facilitates aggregation and historical simulation–based risk measures.
+
+The resulting time series of material costs captures the historical variability of input costs faced by the firm and forms the basis for analysing operating risk, pricing pass-through mechanisms, and hedging strategies in the subsequent sections.
+
+(TUKI POVEJTE A BI VE DALE NOTR TO ČASOVNO VRSTO OZ. TABELO SAM MA 176 VRSTIC)
+\section{Sales modelling under alternative pass-through assumptions}
+
+Having established a time series for the cost of the core input material based on copper prices, the next step is to model the company’s sales dynamics. The objective is to assess how different degrees of commodity price pass-through to customers affect operating performance and risk. Two conceptually distinct sales regimes are considered.
+
+\subsection{Case (a): Fixed sales (no pass-through)}
+
+In the first scenario, sales are assumed to be independent of commodity price movements. This setting reflects a situation in which the firm operates under fixed-price contracts with its customers, such that output prices are negotiated in advance and cannot be adjusted in response to changes in input costs.
+
+Formally, annual sales are assumed to be constant at
+\[
+S_t = S_0 = 920\,\text{million USD} \quad \text{for all } t.
+\]
+In this case, sales exhibit no variability and are uncorrelated with copper price movements. All variability in operating performance therefore arises exclusively from fluctuations in material costs. This scenario serves as a benchmark representing maximum exposure to commodity price risk on the cost side.
+
+\subsection{Case (b): Correlated sales (partial pass-through)}
+
+In the second scenario, sales are allowed to co-move with commodity prices, reflecting the presence of partial price pass-through mechanisms. Economically, this corresponds to situations in which output prices can be adjusted in response to changes in input costs, for example through indexed contracts or pricing clauses linked to commodity markets.
+
+Rather than modelling prices directly, sales dynamics are generated by constructing a time series of sales returns that is correlated with copper price returns. Let $r_t^{Cu}$ denote the logarithmic return of the copper price. Sales returns are modelled as
+\[
+r_t^{S} = \rho \, r_t^{Cu} + \sqrt{1 - \rho^2} \, \varepsilon_t,
+\]
+where $\rho$ is the target correlation coefficient between sales returns and commodity price returns, and $\varepsilon_t$ is an independent standard normal shock. This construction ensures that sales returns exhibit the desired correlation with copper prices while retaining an idiosyncratic component.
+
+Two levels of pass-through are considered:
+\begin{itemize}
+  \item $\rho_1 = 0.74$, representing moderate pass-through to customers,
+  \item $\rho_2 = 0.92$, representing strong pass-through and high pricing flexibility.
+\end{itemize}
+
+Given the simulated sales returns, the corresponding annual sales levels are obtained recursively as
+\[
+S_t = S_{t-1} \exp(r_t^{S}),
+\]
+with initial sales set equal to the current annual sales level, $S_0 = 920$ million USD. As a result, sales are no longer constant and may deviate from the initial level depending on the realised commodity price dynamics.
+
+In contrast to the fixed-sales case, sales now fluctuate over time and respond positively to increases in copper prices. Higher values of the correlation parameter $\rho$ lead to stronger co-movement between sales and commodity prices, resulting in greater variability of sales levels.
+
+\subsection{Empirical Properties of Simulated Sales}
+
+The constructed sales return series, display several economically intuitive properties. First, sales returns are centred around zero, indicating the absence of deterministic growth or decline in sales. Second, volatility increases with the degree of pass-through, reflecting stronger sensitivity of revenues to commodity price movements. Finally, the correlation structure ensures that periods of rising copper prices are, on average, associated with increasing sales revenues, providing a natural hedge against rising input costs.
+
+This modelling approach deliberately reverses the usual empirical estimation framework. Instead of estimating pass-through from observed sales data, sales are generated directly from the commodity price process. This allows for a controlled analysis of how different degrees of pass-through affect operating profitability and risk, which is the primary objective of the present study.
+
+The resulting sales series form the basis for the EBIT simulations and risk analysis presented in the following section.
+
+\section{Simulation of EBIT and comparison with the point estimate}
+
+Based on the simulated time series of material costs and sales described in the previous sections, the company’s operating performance is analysed by constructing a time series of Earnings Before Interest and Taxes (EBIT). At this stage, the financial part of the profit and loss statement is deliberately excluded in order to focus exclusively on operating risk arising from commodity price fluctuations and pricing pass-through mechanisms.
+
+\subsection{EBIT definition and cost structure}
+
+EBIT at time $t$ is defined as
+\[
+\text{EBIT}_t = S_t - CM_t - OC_t - DL_t - OH,
+\]
+where:
+\begin{itemize}
+  \item $S_t$ denotes annual sales,
+  \item $CM_t$ denotes the cost of the core material,
+  \item $OC_t = 0.06 \, S_t$ represents other variable material costs,
+  \item $DL_t = 0.14 \, S_t$ represents direct labour costs,
+  \item $OH = 77$ million USD denotes annual overhead costs.
+\end{itemize}
+
+Material costs are modelled as a linear function of the copper price, while other cost components are proportional to sales or fixed. This structure reflects the firm’s strong exposure to commodity price risk, as nearly 70\% of the sales price is driven by the core input material.
+
+\subsection{Point estimate of EBIT}
+
+Using current prices and the given profit and loss data, the point estimate of EBIT is
+\[
+\text{EBIT}_0 = 24.2 \text{ million USD}.
+\]
+This value reflects the company’s operating profitability at the most recent observed copper price and serves as a benchmark against which simulated EBIT outcomes are compared.
+
+\subsection{Simulated EBIT under alternative sales regimes}
+
+EBIT is simulated for each historical observation using the corresponding material cost and sales levels under the three sales regimes introduced previously:
+\begin{itemize}
+  \item fixed sales (no pass-through),
+  \item partial pass-through with $\rho_1 = 0.74$,
+  \item strong pass-through with $\rho_2 = 0.92$.
+\end{itemize}
+
+For each scenario, a time series of annual EBIT levels is obtained. Table~\ref{tab:ebit_results} summarises the average simulated EBIT and the EBIT corresponding to the most recent observation (current prices).
+
+\begin{table}[h!]
+\centering
+\caption{Simulated EBIT under Alternative Sales Regimes}
+\label{tab:ebit_results}
+\begin{tabular}{lcc}
+\hline
+\textbf{Scenario} & \textbf{Average EBIT} & \textbf{Current EBIT} \\
+ & (USD million) & (USD million) \\
+\hline
+Fixed sales (no pass-through) & 183.2 & 24.2 \\
+Partial pass-through ($\rho_1 = 0.74$) & 117.5 & 7.3 \\
+Strong pass-through ($\rho_2 = 0.92$) & 96.8 & 69.4 \\
+\hline
+\end{tabular}
+\end{table}
+
+The average simulated EBIT differs substantially across scenarios. Under fixed sales, average EBIT is high relative to the current point estimate, reflecting the fact that historical copper prices were often lower than current levels. However, this scenario also exhibits significant variability in EBIT, as all commodity price fluctuations directly affect costs.
+
+\subsection{Interpretation}
+
+Several important insights emerge from the EBIT simulations. First, the current EBIT level is substantially lower than the historical average under all scenarios, indicating that the firm is currently operating in an unfavourable commodity price environment. This is particularly evident in the fixed-sales case, where elevated copper prices significantly compress margins.
+
+Second, sales pass-through acts as a natural hedge against commodity price risk. Strong pass-through ($\rho_2 = 0.92$) substantially improves current EBIT relative to the fixed-sales case, raising EBIT from USD 24.2 million to USD 69.4 million at current prices. However, partial pass-through ($\rho_1 = 0.74$) proves insufficient to offset high input costs and results in even weaker current EBIT.
+
+Finally, increasing pass-through compresses the EBIT distribution, while strong pass-through improves downside protection, it also reduces average EBIT by limiting upside potential when commodity prices are low. This trade-off highlights the importance of evaluating operating performance not only in terms of expected profitability but also in terms of downside risk, which is analysed formally in the next section using Value-at-Risk and Expected Tail Loss measures.
+
+\section{Value-at-Risk, Expected Tail Loss and management implications}
+
+While average EBIT provides useful information about expected operating performance, it does not adequately capture downside risk arising from adverse commodity price movements. To assess the firm’s exposure to extreme but plausible outcomes, this section evaluates the risk of EBIT using Value-at-Risk (VaR) and Expected Tail Loss (ETL).
+
+\subsection{Risk measures}
+
+Value-at-Risk at confidence level $\alpha = 5\%$ is defined as the lower $\alpha$-quantile of the EBIT distribution:
+\[
+\text{VaR}_{5\%} = \inf \{ x : \mathbb{P}(\text{EBIT} \leq x) \geq 5\% \}.
+\]
+It represents the EBIT level that will not be exceeded with 95\% confidence.
+
+Expected Tail Loss (ETL), also referred to as Expected shortfall, is defined as the average EBIT conditional on being in the worst 5\% of outcomes:
+\[
+\text{ETL}_{5\%} = \mathbb{E}[\text{EBIT} \mid \text{EBIT} \leq \text{VaR}_{5\%}].
+\]
+ETL provides a more conservative measure of risk by capturing the severity of losses beyond the VaR threshold.
+
+Both measures are computed directly from the simulated EBIT distributions obtained in the previous section.
+
+\subsection{Empirical results}
+
+Table~\ref{tab:var_etl} reports the VaR and ETL at the 5\% level for all three sales regimes.
+
+\begin{table}[h!]
+\centering
+\caption{VaR and ETL at the 5\% level}
+\label{tab:var_etl}
+\begin{tabular}{lcc}
+\hline
+\textbf{Scenario} & \textbf{VaR (5\%)} & \textbf{ETL (5\%)} \\
+ & (USD million) & (USD million) \\
+\hline
+Fixed sales (no pass-through) & 29.5 & 13.9 \\
+Partial pass-through ($\rho_1 = 0.74$) & -34.8 & -52.2 \\
+Strong pass-through ($\rho_2 = 0.92$) & 29.2 & 21.3 \\
+\hline
+\end{tabular}
+\end{table}
+
+Positive values indicate that EBIT remains positive even in the worst 5\% of outcomes, while negative values correspond to operating losses in adverse states.
+
+\subsection{Interpretation}
+
+The results highlight substantial differences in downside risk across sales regimes. Under fixed sales, the firm remains profitable even in the lower tail of the EBIT distribution, although margins are significantly compressed. Introducing partial pass-through with $\rho_1 = 0.74$ markedly worsens downside risk, both VaR and ETL become negative, indicating that the firm would incur operating losses in severe but plausible scenarios. This outcome reflects the fact that moderate pass-through is insufficient to offset high commodity input costs, while simultaneously reducing upside potential when commodity prices are low.
+
+In contrast, strong pass-through ($\rho_2 = 0.92$) significantly improves downside protection. Both VaR and ETL are positive and exceed those observed in the fixed-sales case, demonstrating that high pricing flexibility acts as an effective natural hedge against commodity price risk.
+
+\subsection{Recommendations to the management board}
+
+Several clear recommendations emerge from the analysis. First, reliance on partial pass-through pricing mechanisms should be avoided, as they may increase downside risk and expose the firm to operating losses in adverse commodity price environments. Second, where market conditions permit, the firm should aim to implement pricing structures with strong commodity price indexation, as high pass-through substantially stabilizes EBIT and improves tail outcomes. Third, even under strong pass-through, residual risk remains. Therefore, pricing policy should be complemented by a formal commodity hedging program using financial derivatives. Such a program should be designed with the explicit objective of reducing VaR and ETL rather than maximizing expected profits. Aligning pricing flexibility with financial hedging would allow the firm to achieve a more resilient operating performance and improve planning certainty.
+
+Overall, the results demonstrate that effective management of commodity risk requires a coordinated approach combining commercial pricing decisions with financial risk management instruments.
+
+
+% 9. naloga
 
 \section{Extension to a Two-Commodity Exposure Framework}
 
