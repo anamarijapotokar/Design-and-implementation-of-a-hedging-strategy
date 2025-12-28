@@ -15,7 +15,11 @@ material_cost_0 <- S_0 * material_cost_ratio
 
 print(paste("Current annual material cost (USD):", format(material_cost_0)))
 
+
+
 copper_data <- read_csv("copper.csv", show_col_types = FALSE)
+
+
 
 copper_data <- copper_data %>%
     rename(Date = Month, Price_USD = Price)
