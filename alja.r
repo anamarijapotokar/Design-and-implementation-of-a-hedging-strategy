@@ -12,29 +12,28 @@ source("ana.r")
 
 S_0_EUR <- 920000000
 OH_EUR <- 77000000
-debt_EUR <- 540000000
 
 material_cost_0_EUR <- S_0_EUR * 0.69
 
-a_fx_data <- read_csv("fx_rates_monthly.csv", show_col_types = FALSE)
+fx_data <- read_csv("fx_rates_monthly.csv", show_col_types = FALSE)
 
-a_copper_price_eur <- copper_data$Price_USD / a_fx_data$FX_Rate
+copper_price_eur <- copper_data$Price_USD / fx_data$FX_Rate
 
-a_copper_eur <- as.data.frame(a_copper_price_eur)
-colnames(a_copper_eur) <- paste0("Price_EUR")
-a_copper_eur$Date <- a_fx_data$Date
-a_copper_eur <- a_copper_eur %>% select(Date, everything())
+copper_eur <- as.data.frame(copper_price_eur)
+colnames(copper_eur) <- paste0("Price_EUR")
+copper_eur$Date <- fx_data$Date
+copper_eur <- copper_eur %>% select(Date, everything())
 
 # P_C_0 is the last closing price from the data (initial copper price)
-P_C_0_EUR <- last(a_copper_eur$Price_EUR)
+P_C_0_EUR <- last(copper_eur$Price_EUR)
 print(paste("Current Copper price (EUR):", format(P_C_0_EUR)))
 
-FX_0 <- last(a_fx_data$FX_Rate)
+FX_0 <- last(fx_data$FX_Rate)
 print(paste("Current FX rate:", format(FX_0)))
 
 k_factor_eur <- material_cost_0_EUR / P_C_0_EUR
 
-a_copper_eur <- a_copper_eur %>%
+copper_eur <- copper_eur %>%
   mutate(
     Material_cost_t_EUR = Price_EUR * k_factor_eur,  # CM_t = P_C,t * k
     Log_Returns_Mat = c(NA, diff(log(Material_cost_t_EUR))),
@@ -46,17 +45,17 @@ a_copper_eur <- a_copper_eur %>%
 
 # 2.
 
-log_returns_mat_eur <- a_copper_eur$Log_Returns_Mat
+log_returns_mat_eur <- copper_eur$Log_Returns_Mat
 N_a <- length(log_returns_mat_eur)
 
 set.seed(42)
 epsilon_a <- rnorm(N_a, mean = 0, sd = sd(log_returns_mat_eur)) 
 
-a_sales_returns_eur <- data.frame(Date = a_copper_eur$Date)
+sales_returns_eur <- data.frame(Date = copper_eur$Date)
 
 # a. Non-correlated sales - fixed sales
 
-a_sales_returns_eur <- a_sales_returns_eur %>%
+sales_returns_eur <- sales_returns_eur %>%
   mutate(
     R_Sales_eur_a = 0  # No returns since sales are fixed
   )
@@ -68,7 +67,7 @@ rho_2 <- 0.92  # correlation 2
 
 # (funkcija iz ziva.r)
 
-a_sales_returns_eur <- a_sales_returns_eur %>%
+sales_returns_eur <- sales_returns_eur %>%
   mutate(
     R_Sales_eur_b1 = calculate_correlated_returns(log_returns_mat_eur, epsilon_a, rho_1),
     R_Sales_eur_b2 = calculate_correlated_returns(log_returns_mat_eur, epsilon_a, rho_2)
@@ -76,29 +75,29 @@ a_sales_returns_eur <- a_sales_returns_eur %>%
 
 # sales (funkcija iz ziva.r)
 
-a_sales_eur <- data.frame(Date = a_copper_eur$Date)
+sales_eur <- data.frame(Date = copper_eur$Date)
 
-a_sales_eur <- a_sales_eur %>%
+sales_eur <- sales_eur %>%
   mutate(
     Sales_eur_a = S_0_EUR,  # Fixed sales
-    Sales_eur_b1 = returns_to_price_R(S_0_EUR, a_sales_returns_eur$R_Sales_eur_b1),
-    Sales_eur_b2 = returns_to_price_R(S_0_EUR, a_sales_returns_eur$R_Sales_eur_b2)
+    Sales_eur_b1 = returns_to_price_R(S_0_EUR, sales_returns_eur$R_Sales_eur_b1),
+    Sales_eur_b2 = returns_to_price_R(S_0_EUR, sales_returns_eur$R_Sales_eur_b2)
   )
 
-a_final_data_eur <- a_copper_eur %>%
-left_join(a_sales_eur, by = "Date")
+final_data_eur <- copper_eur %>%
+left_join(sales_eur, by = "Date")
 
 
 # 3. EBIT
 
-a2_final_data_eur <- a_final_data_eur %>%
+final_data2_eur <- final_data_eur %>%
   mutate(
     EBIT_eur_a = Sales_eur_a - Material_cost_t_EUR - 0.06*Sales_eur_a - 0.14*Sales_eur_a - OH_EUR,
     EBIT_eur_b1 = Sales_eur_b1 - Material_cost_t_EUR - 0.06*Sales_eur_b1 - 0.14*Sales_eur_b1 - OH_EUR,
     EBIT_eur_b2 = Sales_eur_b2 - Material_cost_t_EUR - 0.06*Sales_eur_b2 - 0.14*Sales_eur_b2 - OH_EUR
   )
 
-EBIT_eur <- a2_final_data_eur %>%
+EBIT_eur <- final_data2_eur %>%
   summarise(
     EBIT_eur_a = mean(EBIT_eur_a, na.rm = TRUE),
     EBIT_eur_b1 = mean(EBIT_eur_b1, na.rm = TRUE), 
@@ -112,9 +111,9 @@ DL_0_EUR <- DL_ratio * S_0_EUR
 
 EBIT_0_EUR <- S_0_EUR - material_cost_0_EUR - OC_0_EUR - DL_0_EUR - OH_EUR
 
-EBIT_eur_a_last <- tail(a2_final_data_eur$EBIT_eur_a, 1)  # should equal EBIT_0 (≈24.2m)
-EBIT_eur_b1_last <- tail(a2_final_data_eur$EBIT_eur_b1, 1) 
-EBIT_eur_b2_last <- tail(a2_final_data_eur$EBIT_eur_b2, 1) 
+EBIT_eur_a_last <- tail(final_data2_eur$EBIT_eur_a, 1)  # should equal EBIT_0 (≈24.2m)
+EBIT_eur_b1_last <- tail(final_data2_eur$EBIT_eur_b1, 1) 
+EBIT_eur_b2_last <- tail(final_data2_eur$EBIT_eur_b2, 1) 
 
 print(paste("EBIT (EUR):"))
 print(paste(EBIT_eur))
@@ -123,9 +122,9 @@ print(paste(EBIT_eur))
 # 4.
 
 risk_table_eur <- bind_rows(
-  ebit_var_etl(a2_final_data_eur$EBIT_eur_a, alpha)  %>% mutate(case = "a) fixed sales"),
-  ebit_var_etl(a2_final_data_eur$EBIT_eur_b1, alpha) %>% mutate(case = "b) rho = 0.74"),
-  ebit_var_etl(a2_final_data_eur$EBIT_eur_b2, alpha) %>% mutate(case = "b) rho = 0.92")
+  ebit_var_etl(final_data2_eur$EBIT_eur_a, alpha)  %>% mutate(case = "a) fixed sales"),
+  ebit_var_etl(final_data2_eur$EBIT_eur_b1, alpha) %>% mutate(case = "b) rho = 0.74"),
+  ebit_var_etl(final_data2_eur$EBIT_eur_b2, alpha) %>% mutate(case = "b) rho = 0.92")
 ) %>% select(case, alpha, EBIT_VaR, EBIT_ETL)
 
 
@@ -135,9 +134,9 @@ risk_table_m_eur <- risk_table_eur %>%
 
 # 5.
 
-df_hedge_eur <- a2_final_data_eur %>%
+df_hedge_eur <- final_data2_eur %>%
   inner_join(futures, by = "Date") %>%
-  inner_join(a_fx_data, by = "Date") %>%
+  inner_join(fx_data, by = "Date") %>%
   arrange(Date)
 
 df_hedge_eur <- df_hedge_eur %>%
@@ -321,3 +320,87 @@ print(risk_part6_eur)
 
 cat("\n--- PART 6: Hedge efficiency diagnostics (cost-change variance reduction) (EUR) ---\n")
 print(eff_part6_eur)
+
+
+
+# PART 8
+
+sofr_6m <- read_csv("SOFR180DAYAVG.csv", show_col_types=FALSE) %>%
+  rename(Date = observation_date, SOFR_6m = SOFR180DAYAVG)
+
+# for missing data (before 2018) we use T_Bill
+treasury_6m <- read_csv("TREASURY6M.csv", show_col_types=FALSE) %>%
+  rename(Date = observation_date, T_Bill = DTB6)
+
+df_sofr <- data.frame(
+  Date = seq(as.Date("2010-11-01"), as.Date("2025-06-01"), by="month")
+  ) %>%
+  left_join(sofr_6m, by="Date") %>%
+  mutate(
+    # If SOFR is missing (pre-2018), use the proxy rate
+    SOFR = ifelse(is.na(SOFR_6m), treasury_6m$T_Bill, SOFR_6m)
+  ) %>%
+  select(Date, SOFR)
+
+
+
+debt_eur <- 540000000
+spread <- 0.0090    # 90 basis points
+
+# Merge Interest data with your existing EU P&L data
+df_point8 <- df_hedge_eur %>%
+  left_join(df_sofr, by = "Date") %>%
+  mutate(
+    # Annual interest rate = SOFR + 0.9%
+    # We divide by 12 for the monthly expense in the time series
+    Interest_Rate_t = (SOFR/100) + spread, 
+    Interest_Expense_t = (debt_eur * Interest_Rate_t) / 12,
+    
+    # Net Income = EBIT (from Point 7) - Interest
+    Net_Income_b1_hedged = EBIT_eur_b1_hedged - Interest_Expense_t
+  )
+
+# Calculate Risk for the Bottom Line
+risk_net_income <- ebit_var_etl(df_point8$Net_Income_b1_hedged, alpha) %>%
+  mutate(
+    strategy = "Hedged Commodity, Floating Debt",
+    VaR_M = EBIT_VaR / 1e6,
+    ETL_M = EBIT_ETL / 1e6
+  )
+
+print("--- Risk net income: ---")
+print(risk_net_income)
+
+# Until here we have a partial hedging strategy.
+
+# Combined:
+
+# 1. Choose a Fixed Rate for the Interest Rate Swap (IRS)
+# Let's assume the bank offers a fixed rate of 4.5% (0.045)
+fixed_swap_rate <- 0.045 
+
+df_point8 <- df_point8 %>%
+  mutate(
+    # Floating Interest (What you have now)
+    Interest_Expense_Floating = (debt_eur * ((SOFR/100) + spread)) / 12,
+    
+    # Fixed Interest (The Hedge / Interest Rate Swap)
+    # This removes the 'SOFR' variable entirely!
+    Interest_Expense_Fixed = (debt_eur * (fixed_swap_rate + spread)) / 12,
+    
+    # Net Income with COMBINED HEDGE (Commodity + Interest Rate)
+    Net_Income_Combined_Hedge = EBIT_eur_b1_hedged - Interest_Expense_Fixed
+  )
+
+# 2. Compare the Risk
+risk_combined <- bind_rows(
+  ebit_var_etl(df_point8$Net_Income_b1_hedged, alpha) %>% 
+    mutate(strategy = "Hedged Commodity / Floating Debt"),
+  
+  ebit_var_etl(df_point8$Net_Income_Combined_Hedge, alpha) %>% 
+    mutate(strategy = "Combined Hedge (Commodity + Interest Rate)")
+) %>%
+  mutate(VaR_M = EBIT_VaR / 1e6, ETL_M = EBIT_ETL / 1e6)
+
+print("Combined hedging strategy:")
+print(risk_combined)
