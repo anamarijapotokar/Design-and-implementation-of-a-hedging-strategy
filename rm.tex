@@ -241,7 +241,6 @@ Overall, the results demonstrate that effective management of commodity risk req
 
 \sisetup{group-separator={,},group-minimum-digits=4}
 
-
 \section{Hedging setup and methodology}
 
 \subsection{Scope and objective}
@@ -252,7 +251,7 @@ Hedges are constructed using the minimum-variance hedge ratio applied to first d
 \[
 h^\ast = \frac{\mathrm{Cov}(\Delta CM,\Delta X)}{\mathrm{Var}(\Delta X)}.
 \]
-Hedge P\&L is then computed as $\mathrm{PnL}_t = h^\ast \Delta X_t$ and added to each EBIT series. Economically, the firm is harmed by rising copper prices through higher input costs, so taking a \emph{long} position in the hedge instrument provides positive hedge P\&L when copper prices rise.
+Hedge P\&L is then computed as $\mathrm{PnL}_t = h^\ast \Delta X_t$ and added to each EBIT series. Economically, the firm is harmed by rising copper prices through higher input costs, so taking a \emph{long} position in the hedge instrument provides positive hedge P\&L when copper prices rise. VaR and ETL are computed by historical simulation from the empirical EBIT distribution.
 
 \subsection{Unit conversion and contract sizing}
 Copper futures (HG=F) are quoted in USD per pound. Prices are converted to USD per metric ton using
@@ -261,8 +260,14 @@ Copper futures (HG=F) are quoted in USD per pound. Prices are converted to USD p
 \]
 A standard contract covers $25{,}000$ lb, corresponding to approximately $11.3398$ metric tons.
 
-\subsection{Implementation note: how the synthetic derivative was constructed}
-To create a derivative series with a \emph{controlled} correlation to material-cost changes, the code starts from standardized cost changes and adds a noise term that is explicitly made orthogonal to those standardized changes. In practice, this is done by projecting random noise onto the cost-change direction and subtracting that projection, so the remaining noise has (approximately) zero sample correlation with the cost changes. The final derivative change is then formed as a weighted mixture of the standardized cost changes and the orthogonal noise, which guarantees the desired sample correlation level (e.g.\ 0.60, 0.75, 0.90) while keeping the variability comparable by scaling to a chosen target standard deviation.
+\subsection{Implementation note: synthetic derivative construction in Parts 5 and 6}
+Two slightly different constructions are used in the code. In Part 5, the derivative \emph{changes} are generated as a linear combination
+\[
+\Delta D_t = \rho \, \Delta CM_t + \sqrt{1-\rho^2}\,\varepsilon_t,
+\]
+with $\varepsilon_t$ drawn from a normal distribution scaled to the volatility of $\Delta CM_t$. Because the sample is finite and the noise is not explicitly orthogonalized to $\Delta CM_t$, the realized \emph{sample} correlation can deviate from the target; in the reported run, the target is $0.75$ but the realized sample correlation equals $0.717$.
+
+In Part 6, the derivative changes are generated using an orthogonalization step that removes the projection of the random noise on standardized cost changes. This construction ensures that the realized \emph{sample} correlation matches the target correlation levels (0.60, 0.75, 0.90) much more tightly, which is preferable for a clean correlation sensitivity analysis.
 
 \section{Results for Parts 5 and 6}
 
@@ -295,18 +300,18 @@ b) $\rho=0.92$ & hedged (copper futures) & 0.05 & 21.3 & 10.4 \\
 
 The futures hedge does not lead to uniform risk reduction in EBIT. In case (a) fixed sales, both VaR and ETL decrease after hedging, indicating worse left-tail profitability. In case (b) with $\rho=0.74$, VaR improves slightly (from $-38.2$ to $-36.8$), but ETL becomes more negative (from $-53.9$ to $-61.7$), meaning the most adverse outcomes in the far tail deteriorate. In case (b) with $\rho=0.92$, both VaR and ETL fall strongly, which is consistent with an operational natural hedge: when revenues co-move strongly with copper, the unhedged EBIT already benefits from offsetting movements, and a financial hedge can remove part of this beneficial co-movement.
 
-\subsection{Hedge using a synthetic derivative with corr $\approx 0.75$ to costs}
-A synthetic derivative instrument is constructed so that its changes have sample correlation 0.75 with $\Delta CM$. The estimated hedge quantity is
+\subsection{Hedge using a synthetic derivative (target corr $0.75$, realized sample corr $0.717$)}
+A synthetic derivative instrument is constructed to target correlation $0.75$ with $\Delta CM$, but in the reported run the realized sample correlation between $\Delta CM$ and $\Delta D$ equals $0.717$. The estimated hedge quantity is
 \[
-h^\ast_{\text{deriv}} = 37{,}971.23~\text{tons},
+h^\ast_{\text{deriv}} = 24{,}360.62~\text{tons},
 \qquad
-N \approx \frac{37{,}971.23}{11.3398} \approx 3{,}348~\text{contracts (futures-equivalent)}.
+N \approx \frac{24{,}360.62}{11.3398} \approx 2{,}148~\text{contracts (futures-equivalent)}.
 \]
 Table~\ref{tab:p5_deriv} reports the corresponding VaR/ETL results.
 
 \begin{table}[h!]
 \centering
-\caption{Part 5B: EBIT risk (USD millions), unhedged vs.\ hedged with synthetic derivative (corr $\approx 0.75$).}
+\caption{Part 5B: EBIT risk (USD millions), unhedged vs.\ hedged with synthetic derivative (target corr $0.75$, realized sample corr $0.717$).}
 \label{tab:p5_deriv}
 \begin{tabular}{llccc}
 \toprule
@@ -315,14 +320,14 @@ Case & Strategy & $\alpha$ & VaR$_\alpha$ & ETL$_\alpha$ \\
 a) fixed sales & unhedged & 0.05 & 28.6 & 12.6 \\
 b) $\rho=0.74$ & unhedged & 0.05 & -38.2 & -53.9 \\
 b) $\rho=0.92$ & unhedged & 0.05 & 28.3 & 20.3 \\
-a) fixed sales & hedged (deriv corr$\sim$0.75) & 0.05 & 27.4 & 13.3 \\
-b) $\rho=0.74$ & hedged (deriv corr$\sim$0.75) & 0.05 & -34.5 & -59.1 \\
-b) $\rho=0.92$ & hedged (deriv corr$\sim$0.75) & 0.05 & 17.1 & 6.80 \\
+a) fixed sales & hedged (deriv corr$\sim$0.75) & 0.05 & 28.9 & 13.5 \\
+b) $\rho=0.74$ & hedged (deriv corr$\sim$0.75) & 0.05 & -31.1 & -57.0 \\
+b) $\rho=0.92$ & hedged (deriv corr$\sim$0.75) & 0.05 & 20.8 & 8.70 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Compared to the futures hedge, the synthetic derivative hedge improves VaR more noticeably in the $\rho=0.74$ operating case (from $-38.2$ to $-34.5$), but ETL remains worse than unhedged. This indicates that correlation below one can reduce moderately adverse outcomes around the $5\%$ quantile while still leaving very severe tail outcomes largely unchanged or slightly worse. In the high revenue--commodity correlation case ($\rho=0.92$), hedging again lowers both VaR and ETL, reinforcing the interpretation that the firm already has a strong natural hedge through revenues.
+Relative to the futures hedge, the synthetic derivative hedge behaves differently. In the fixed-sales case, VaR and ETL increase slightly (from $28.6$ to $28.9$ and from $12.6$ to $13.5$), indicating a modest improvement in the left tail of EBIT. In the $\rho=0.74$ operating case, the derivative hedge improves VaR substantially (from $-38.2$ to $-31.1$), but ETL becomes more negative (from $-53.9$ to $-57.0$), which means that extremely adverse outcomes in the far tail remain severe and can even worsen. In the high revenue--commodity correlation case ($\rho=0.92$), hedging lowers both VaR and ETL, reinforcing the interpretation that the firm already has a strong natural hedge through revenues and that financial hedging can remove beneficial co-movement between revenues and costs.
 
 \subsection{Correlation sensitivity analysis (synthetic derivative)}
 Part 6 repeats the derivative hedge for correlations $\rho_{\text{deriv}}\in\{0.60,0.75,0.90\}$. Derivative changes are constructed so that their \emph{sample} correlation with $\Delta CM$ equals the target correlation, and the volatility is scaled to be comparable across correlation levels.
@@ -380,10 +385,10 @@ b) $\rho=0.92$ & hedged (deriv corr$\sim$0.9) & 0.90 & 12.6 & -6.08 \\
 \end{tabular}
 \end{table}
 
-The correlation sensitivity results show a clear distinction between hedging the cost exposure and improving EBIT tail risk. While hedge effectiveness on cost changes increases monotonically with correlation, the EBIT VaR/ETL outcomes do not improve monotonically. In particular, in the operating scenario with strong revenue--commodity correlation ($\rho=0.92$), aggressive cost hedging can significantly reduce VaR and even produce a negative ETL at $\rho_{\text{deriv}}=0.90$. This supports the interpretation that the firm has a natural hedge through revenues, and that a strong financial hedge can remove beneficial co-movement between revenues and costs.
+The correlation sensitivity results show a clear distinction between hedging the cost exposure and improving EBIT tail risk. While hedge effectiveness on cost changes increases monotonically with correlation, the EBIT VaR/ETL outcomes do not improve monotonically. In particular, in the operating scenario with strong revenue--commodity correlation ($\rho=0.92$), aggressive cost hedging can significantly reduce VaR and can even produce a negative ETL at $\rho_{\text{deriv}}=0.90$. This supports the interpretation that the firm has a natural hedge through revenues, and that a strong financial hedge can remove beneficial co-movement between revenues and costs.
 
 \subsection{Conclusion}
-The minimum-variance approach implies hedge sizes on the order of $3\times 10^4$ to $4.6\times 10^4$ tons, corresponding to thousands of standard futures contracts. Increasing correlation between the hedge instrument and cost changes strongly improves hedge effectiveness on the cost exposure. However, EBIT-based VaR/ETL results depend on the firm's operating structure. When revenues co-move strongly with copper prices, the firm benefits from an operational natural hedge, and additional financial hedging can worsen downside profitability outcomes. Therefore, a hedging policy aimed at reducing EBIT tail risk should be designed using the net exposure of EBIT (revenue and cost jointly), not only by minimizing variance of input costs.
+Across the implemented instruments and correlation levels, the minimum-variance approach implies hedge sizes on the order of roughly $2.4\times 10^4$ to $4.6\times 10^4$ tons, corresponding to thousands of standard futures contracts. Increasing correlation between the hedge instrument and cost changes strongly improves hedge effectiveness on the cost exposure. However, EBIT-based VaR/ETL results depend on the firm's operating structure. When revenues co-move strongly with copper prices, the firm benefits from an operational natural hedge, and additional financial hedging can worsen downside profitability outcomes. Therefore, a hedging policy aimed at reducing EBIT tail risk should be designed using the net exposure of EBIT (revenue and cost jointly), not only by minimizing variance of input costs.
 
 
 

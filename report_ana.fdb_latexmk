@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1767552556 "/Users/anamariapotokar/Desktop/Risk Management/Design-and-implementation-of-a-hedging-strategy/report_ana.tex" "report_ana.pdf" "report_ana" 1767552556 0
-  "/Users/anamariapotokar/Desktop/Risk Management/Design-and-implementation-of-a-hedging-strategy/report_ana.tex" 1767552555 10088 91b34bb10c029ac3f153a541f2865fdb ""
+["pdflatex"] 1767558591 "/Users/anamariapotokar/Desktop/Risk Management/Design-and-implementation-of-a-hedging-strategy/report_ana.tex" "report_ana.pdf" "report_ana" 1767558592 0
+  "/Users/anamariapotokar/Desktop/Risk Management/Design-and-implementation-of-a-hedging-strategy/report_ana.tex" 1767558591 10088 91b34bb10c029ac3f153a541f2865fdb ""
   "/usr/local/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -88,9 +88,9 @@
   "/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1680265421 4623355 b8cad38412faebe1ce5b780a45db67bd ""
   "/usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1680265411 7883480 918ef36eafab6b91b5cf0770e155a1d2 ""
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
-  "report_ana.aux" 1767552556 3332 f1628d8c03fdbb1a3c62e685947fa68b "pdflatex"
-  "report_ana.out" 1767552556 2804 18896124d2aa5259f95125ad53fca900 "pdflatex"
-  "report_ana.tex" 1767552555 10088 91b34bb10c029ac3f153a541f2865fdb ""
+  "report_ana.aux" 1767558592 3332 f1628d8c03fdbb1a3c62e685947fa68b "pdflatex"
+  "report_ana.out" 1767558592 2804 18896124d2aa5259f95125ad53fca900 "pdflatex"
+  "report_ana.tex" 1767558591 10088 91b34bb10c029ac3f153a541f2865fdb ""
   (generated)
   "report_ana.aux"
   "report_ana.log"
