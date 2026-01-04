@@ -111,12 +111,15 @@ DL_0_EUR <- DL_ratio * S_0_EUR
 
 EBIT_0_EUR <- S_0_EUR - material_cost_0_EUR - OC_0_EUR - DL_0_EUR - OH_EUR
 
-EBIT_eur_a_last <- tail(final_data2_eur$EBIT_eur_a, 1)  # should equal EBIT_0 (≈24.2m)
-EBIT_eur_b1_last <- tail(final_data2_eur$EBIT_eur_b1, 1) 
-EBIT_eur_b2_last <- tail(final_data2_eur$EBIT_eur_b2, 1) 
 
-print(paste("EBIT (EUR):"))
+print(paste("Last Simulated EBIT (Scenario A):", format(last(final_data2_eur$EBIT_eur_a))))
+print(paste("Last Simulated EBIT (Scenario B1):", format(last(final_data2_eur$EBIT_eur_b1))))
+print(paste("Last Simulated EBIT (Scenario B2):", format(last(final_data2_eur$EBIT_eur_b2))))
+
+
+print(paste("Average EBIT (EUR):"))
 print(paste(EBIT_eur))
+
 
 
 # 4.
@@ -368,7 +371,7 @@ risk_net_income <- ebit_var_etl(df_point8$Net_Income_b1_hedged, alpha) %>%
     ETL_M = EBIT_ETL / 1e6
   )
 
-print("--- Risk net income: ---")
+print("Risk net income:")
 print(risk_net_income)
 
 # Until here we have a partial hedging strategy.

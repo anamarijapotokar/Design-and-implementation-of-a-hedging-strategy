@@ -36,7 +36,7 @@ Let $P_t^{Cu}$ denote the spot price of copper at time $t$.
 
 At current prices, annual sales of the company amount to USD 920 million. Given that the core material represents 69\% of the sales price, the current annual material cost is
 \[
-CM_0 = 0.69 \times 920\,\text{million USD} = 634{,}8\, \text{million USD}.
+CM_0 = 0.69 \times 920\,\text{million USD} = 634.8\, \text{million USD}.
 \]
 
 To link historical copper prices to the firm’s material costs, we assume a linear relationship between the commodity price and the cost of materials. Specifically, the material cost at time $t$ is modelled as
@@ -45,9 +45,9 @@ CM_t = k \cdot P_t^{Cu},
 \]
 where the scaling factor $k$ represents the effective quantity of copper embedded in annual production. The parameter $k$ is calibrated such that the material cost at the current copper price matches the observed current material cost:
 \[
-k = \frac{CM_0}{P_0^{Cu}} = 64544{,}53,
+k = \frac{CM_0}{P_0^{Cu}} = 64544.53,
 \]
-where $P_0^{Cu} = 9835{,}07$ is the most recent observed copper price.
+where $P_0^{Cu} = 9835.07$ is the most recent observed copper price.
 
 This calibration ensures that the constructed material cost series is fully consistent with the company’s current profit and loss statement while preserving the historical dynamics of copper prices.
 
@@ -109,6 +109,7 @@ This modelling approach deliberately reverses the usual empirical estimation fra
 The resulting sales series form the basis for the EBIT simulations and risk analysis presented in the following section.
 
 \section{Simulation of EBIT and comparison with the point estimate}
+\label{sec:3}
 
 Based on the simulated time series of material costs and sales described in the previous sections, the company’s operating performance is analysed by constructing a time series of Earnings Before Interest and Taxes (EBIT). At this stage, the financial part of the profit and loss statement is deliberately excluded in order to focus exclusively on operating risk arising from commodity price fluctuations and pricing pass-through mechanisms.
 
@@ -175,6 +176,7 @@ Second, sales pass-through acts as a natural hedge against commodity price risk.
 Finally, increasing pass-through compresses the EBIT distribution, while strong pass-through improves downside protection, it also reduces average EBIT by limiting upside potential when commodity prices are low. This trade-off highlights the importance of evaluating operating performance not only in terms of expected profitability but also in terms of downside risk, which is analysed formally in the next section using Value-at-Risk and Expected Tail Loss measures.
 
 \section{Value-at-Risk, Expected Tail Loss and management implications}
+\label{sec:4}
 
 While average EBIT provides useful information about expected operating performance, it does not adequately capture downside risk arising from adverse commodity price movements. To assess the firm’s exposure to extreme but plausible outcomes, this section evaluates the risk of EBIT using Value-at-Risk (VaR) and Expected Tail Loss (ETL).
 
@@ -227,6 +229,138 @@ In contrast, strong pass-through ($\rho_2 = 0.92$) significantly improves downsi
 Several clear recommendations emerge from the analysis. First, reliance on partial pass-through pricing mechanisms should be avoided, as they may increase downside risk and expose the firm to operating losses in adverse commodity price environments. Second, where market conditions permit, the firm should aim to implement pricing structures with strong commodity price indexation, as high pass-through substantially stabilizes EBIT and improves tail outcomes. Third, even under strong pass-through, residual risk remains. Therefore, pricing policy should be complemented by a formal commodity hedging program using financial derivatives. Such a program should be designed with the explicit objective of reducing VaR and ETL rather than maximizing expected profits. Aligning pricing flexibility with financial hedging would allow the firm to achieve a more resilient operating performance and improve planning certainty.
 
 Overall, the results demonstrate that effective management of commodity risk requires a coordinated approach combining commercial pricing decisions with financial risk management instruments.
+
+
+
+
+
+
+
+
+
+
+% 7. in 8. naloga
+
+\section{Transition to a EU-based company}
+\label{sec:7}
+
+In this section, we reconsider the risk profile under the assumption that the company is based in the European Union. The functional currency is now the Euro (EUR), while the primary raw material (Copper) remains quoted in US Dollars (USD).
+
+The company’s financial parameters were adjusted to:
+\begin{itemize}
+    \item \textbf{Initial Sales ($S_0$):} 920,000,000 EUR
+    \item \textbf{Overhead Costs (OH):} 77,000,000 EUR
+    \item \textbf{Debt:} 540,000,000 EUR
+\end{itemize}
+
+Copper prices in EUR are subject to EUR/USD exchange rate, which was obtained from publicly available data source (Yahoo Finance).
+\[ P_t^{Cu,\text{EUR}} = P_t^{Cu} \cdot FX_t^{\text{USD/EUR}} \]
+
+From here on, the calculations are the same as in sections 1-6.
+
+\subsection{Results for EU-based company}
+
+Current copper price is $P_0^{Cu,\text{EUR}} = 8643.65$ with current FX rate $FX_0^{\text{EUR/USD}}=1.137838$.
+Factor $k$ is $73441.2$.\\
+
+As before (in section \ref{sec:3}), we present EBIT for different scenarios in table \ref{tab:ebit_results_eur}.
+There is a noticable difference in EBIT values when comparing them to those in section \ref{sec:3}.
+That is because od added FX risk. A weakening Euro acts like an increase in the price of copper.
+Because of the nature of the model (that material represents $69\%$ of the price of final products), every time the Euro weakened, sales prices were raised to compensate.
+Because fixed overheads remained constant at 77M EUR, the firm experienced significant margin expansion in nominal terms.
+
+\begin{table}[h!]
+\centering
+\caption{Simulated EBIT under Alternative Sales Regimes}
+\label{tab:ebit_results_eur}
+\begin{tabular}{lcc}
+\hline
+\textbf{Scenario} & \textbf{Average EBIT} & \textbf{Current EBIT} \\
+ & (EUR million) & (EUR million) \\
+\hline
+Fixed sales (no pass-through) & 197.1 & 24.2 \\
+Partial pass-through ($\rho_1 = 0.74$) & 221.1 & 124.9 \\
+Strong pass-through ($\rho_2 = 0.92$) & 222.2 & 231.6 \\
+\hline
+\end{tabular}
+\end{table}
+
+In table \ref{tab:var_etl_eur} we present VaR and ETL at the 5\% level.
+The transition to a EUR-based operation significantly alters the firm's risk profile, moving from a single-commodity risk to a "double volatility" environment involving both copper prices and FX fluctuations.
+In contrast to the USD results, where a strong pass-through provided a robust natural hedge, the EUR results in table \ref{tab:var_etl_eur} show a dramatic increase in VaR and ETL.
+The greatly increased VaR reflects the fact that the firm is now exposed to the uncertainty of a weakening Euro.
+Furthermore, the massive scale of these losses is amplified by the firm's increased nominal revenue, making the absolute impact of tail-risk events far more severe than in the original USD-denominated model.
+
+\begin{table}[h!]
+\centering
+\caption{VaR and ETL at the 5\% level}
+\label{tab:var_etl_eur}
+\begin{tabular}{lcc}
+\hline
+\textbf{Scenario} & \textbf{VaR (5\%)} & \textbf{ETL (5\%)} \\
+ & (EUR million) & (EUR million) \\
+\hline
+Fixed sales (no pass-through) & 15.4 & -6.6 \\
+Partial pass-through ($\rho_1 = 0.74$) & 65.5 & 45.4 \\
+Strong pass-through ($\rho_2 = 0.92$) & 146.6 & 135.8 \\
+\hline
+\end{tabular}
+\end{table}
+
+
+
+\section{Financial Risk and Combined Hedging Strategy}
+
+In this stage of the risk analysis, we transition from EBIT to Net Income. This requires accounting for the firm's financing structure, specifically its 540 million EUR debt facility. This section evaluates the impact of interest rate volatility on the bottom line and demonstrates the benefits of a combined hedging strategy.
+
+\subsection{Financing Structure and Interest Rate Exposure}
+The firm carries 540 million EUR in debt, priced at a floating rate of 6-month SOFR plus a spread of 90 basis points (0.90\%). To model this exposure historically, we utilized the 6-month Treasury Bill rate as a proxy for the pre-2018 period when SOFR data was unavailable. 
+
+The interest expense is calculated monthly as:
+\[
+    \text{Interest Expense}_{t} = \frac{\text{Debt} \cdot (\text{SOFR}_{t} + \text{Spread})}{12}
+\]
+
+This financing structure introduces a new source of volatility. Even if operating margins are protected via commodity hedges, a change in global interest rates can significantly influence Net Income.
+
+\subsection{The Combined Hedge: Commodity and Interest Rates}
+To achieve total risk stabilization, we propose a "Combined Hedge" strategy. In addition to the optimal copper futures hedge established before, the firm enters into an Interest Rate Swap (IRS). We assume a fixed swap rate of 4.5\%, which effectively transforms the floating-rate debt into a fixed-rate obligation of 5.4\% (Fixed Rate + Spread).
+
+This removes the sensitivity of Net Income to the SOFR index, as the interest expense becomes a constant in the Profit and Loss (P\&L) statement:
+\[
+    \text{Net Income}_{Combined} = \text{EBIT}_{Hedged} - \overline{\text{Interest Expense}}_{Fixed}
+\]
+
+\subsection{Comparative Risk Analysis}
+The results of the simulation demonstrate the effectiveness of fixing financial costs alongside operating costs. Table \ref{tab:combined_results} summarizes the Value at Risk (VaR) and Expected Tail Loss (ETL) for Net Income across all three sales regimes ($a$, $b_1$, $b_2$) at the 5\% level.
+
+\subsection{Results and Risk Reduction}
+Table \ref{tab:combined_risk} compares the risk profile of the commodity-hedged firm with and without interest rate protection.
+The chosen scenario for the commodity is partial pass-through ($\rho = 0.74$).
+
+\begin{table}[h!]
+\centering
+\caption{Net Income Risk Comparison (EUR millions)}
+\label{tab:combined_risk}
+\begin{tabular}{lccc}
+\hline
+\textbf{Strategy} & \textbf{VaR (5\%)} & \textbf{ETL (5\%)} \\ \hline
+Hedged Commodity / Floating Debt & 53.1 & 30.4 \\
+Combined Hedge (Commodity + IRS) & 53.4 & 30.8 \\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Discussion of Findings}
+In the partial pass-through regime, the risk profile is heavily influenced by the nominal scale of EUR-denominated operations. The simulation results show that:
+\begin{itemize}
+    \item The VaR remains relatively stable between the floating and combined strategies (approximately 53M EUR). This indicates that while the IRS stabilizes the interest expense, the dominant source of volatility in this regime remains the residual currency and commodity basis risk.
+    \item The primary benefit of the IRS is the elimination of "interest rate shock" risk, which ensures that even during periods of tight monetary policy, the firm's debt service obligations remain constant.
+\end{itemize}
+
+% \subsection{Managerial Implications}
+% The transition to a combined hedge represents the most robust risk management posture for the firm. While the commodity hedge protected the operating margin from copper price and FX volatility, the IRS eliminates the "financial tail risk" associated with tightening monetary policy. 
+
+% As shown in the results, the Combined Hedge provides a higher floor for Net Income. By fixing the two largest sources of external uncertainty---commodity costs and financing costs---the firm can ensure debt serviceability and maintain stable dividends even in adverse market environments. This integrated approach to risk management is essential for an EU-based firm operating in volatile international markets.
 
 
 % 9. naloga
