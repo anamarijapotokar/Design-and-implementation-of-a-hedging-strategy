@@ -371,8 +371,8 @@ risk_net_income <- ebit_var_etl(df_point8$Net_Income_b1_hedged, alpha) %>%
     ETL_M = EBIT_ETL / 1e6
   )
 
-print("Risk net income:")
-print(risk_net_income)
+#print("Risk net income:")
+#print(risk_net_income)
 
 # Until here we have a partial hedging strategy.
 
