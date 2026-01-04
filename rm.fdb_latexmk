@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber rm"] 1767525450.61183 "rm.bcf" "rm.bbl" "rm" 1767550237.0385 0
-  "rm.bcf" 1767550236.96973 107992 1372e320b8e132f38eb5706b82283cc8 "pdflatex"
+["biber rm"] 1767525450.61183 "rm.bcf" "rm.bbl" "rm" 1767550558.27085 0
+  "rm.bcf" 1767550558.19745 107992 1372e320b8e132f38eb5706b82283cc8 "pdflatex"
   (generated)
   "rm.bbl"
   "rm.blg"
   (rewritten before read)
-["pdflatex"] 1767550236.09953 "/Users/aljadostal/Documents/faks/prvi mag/Design-and-implementation-of-a-hedging-strategy/rm.tex" "rm.pdf" "rm" 1767550237.03893 0
-  "/Users/aljadostal/Documents/faks/prvi mag/Design-and-implementation-of-a-hedging-strategy/rm.tex" 1767550234.86788 28633 594a5b85b0d0e530c721cde11036149d ""
+["pdflatex"] 1767550557.37109 "/Users/aljadostal/Documents/faks/prvi mag/Design-and-implementation-of-a-hedging-strategy/rm.tex" "rm.pdf" "rm" 1767550558.27186 0
+  "/Users/aljadostal/Documents/faks/prvi mag/Design-and-implementation-of-a-hedging-strategy/rm.tex" 1767550556.20471 28647 dafc1e5b5af91a11675e617e979617ac ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm" 1136768653 1536 74b7293ec3713bb7fdca8dd1bd1f469c ""
@@ -122,11 +122,11 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1766077321 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1766077208 3345745 6a978c59d915ec7f9759e9d22ec574c2 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "rm.aux" 1767550236.9673 6649 e47f2957798ea663b3b5a5510c02a001 "pdflatex"
+  "rm.aux" 1767550558.19519 6649 e47f2957798ea663b3b5a5510c02a001 "pdflatex"
   "rm.bbl" 1767525461.71105 0 d41d8cd98f00b204e9800998ecf8427e "biber rm"
-  "rm.out" 1767550236.96889 8490 d23a421a07aed48f30316a253056b198 "pdflatex"
-  "rm.run.xml" 1767550236.97032 2210 4a1c8bde528814043db5d0012188e32f "pdflatex"
-  "rm.tex" 1767550234.86788 28633 594a5b85b0d0e530c721cde11036149d ""
+  "rm.out" 1767550558.19658 8490 d23a421a07aed48f30316a253056b198 "pdflatex"
+  "rm.run.xml" 1767550558.19803 2210 4a1c8bde528814043db5d0012188e32f "pdflatex"
+  "rm.tex" 1767550556.20471 28647 dafc1e5b5af91a11675e617e979617ac ""
   (generated)
   "rm.aux"
   "rm.bcf"
