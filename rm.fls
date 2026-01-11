@@ -1,8 +1,8 @@
-PWD /Users/aljadostal/Documents/faks/prvi mag/Design-and-implementation-of-a-hedging-strategy
+PWD /Users/aljadostal/Documents/faks/prvi mag/Risk Management/Hedging Strategy (januar, po 4, 40)/Design-and-implementation-of-a-hedging-strategy
 INPUT /usr/local/texlive/2025/texmf.cnf
 INPUT /usr/local/texlive/2025/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/aljadostal/Documents/faks/prvi mag/Design-and-implementation-of-a-hedging-strategy/rm.tex
+INPUT /Users/aljadostal/Documents/faks/prvi mag/Risk Management/Hedging Strategy (januar, po 4, 40)/Design-and-implementation-of-a-hedging-strategy/rm.tex
 OUTPUT rm.log
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/base/article.cls
