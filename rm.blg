@@ -1,4 +1,4 @@
-[0] Config.pm:307> INFO - This is Biber 2.19
-[0] Config.pm:310> INFO - Logfile is 'rm.blg'
-[37] biber-darwin:340> INFO - === Sun Jan 11, 2026, 22:26:27
-[45] Biber.pm:419> INFO - Reading 'rm.bcf'
+[0] Config.pm:308> INFO - This is Biber 2.20
+[0] Config.pm:311> INFO - Logfile is 'rm.blg'
+[46] biber-darwin:340> INFO - === Sun Jan 11, 2026, 22:39:25
+[58] Biber.pm:420> INFO - Reading 'rm.bcf'
