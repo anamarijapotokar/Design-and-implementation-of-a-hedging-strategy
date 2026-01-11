@@ -1,6 +1,8 @@
-PWD c:\Users\manca\OneDrive\Documents\Faks_FMF\MAG\1. letnik\Risk Mangement\Hedging-Strategy\Design-and-implementation-of-a-hedging-strategy
-INPUT C:\Users\manca\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT c:\Users\manca\OneDrive\Documents\Faks_FMF\MAG\1. letnik\Risk Mangement\Hedging-Strategy\Design-and-implementation-of-a-hedging-strategy\rm.tex
+PWD /Users/aljadostal/Documents/faks/prvi mag/Design-and-implementation-of-a-hedging-strategy
+INPUT /usr/local/texlive/2025/texmf.cnf
+INPUT /usr/local/texlive/2025/texmf-dist/web2c/texmf.cnf
+INPUT /usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT /Users/aljadostal/Documents/faks/prvi mag/Design-and-implementation-of-a-hedging-strategy/rm.tex
 OUTPUT rm.log
 INPUT C:\Users\manca\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
 INPUT C:\Users\manca\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls

@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.7) (preloaded format=pdflatex 2022.10.6)  11 JAN 2026 22:04
+=======
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.12.18)  11 JAN 2026 21:41
+>>>>>>> 7ae197042392ec37afc5bc6cfe996daa9af49238
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
+<<<<<<< HEAD
 **"c:/Users/manca/OneDrive/Documents/Faks_FMF/MAG/1. letnik/Risk Mangement/Hedging-Strategy/Design-and-implementation-of-a-hedging-strategy/rm.tex"
 (c:/Users/manca/OneDrive/Documents/Faks_FMF/MAG/1. letnik/Risk Mangement/Hedging-Strategy/Design-and-implementation-of-a-hedging-strategy/rm.tex
 LaTeX2e <2022-06-01> patch level 5
@@ -10,6 +15,16 @@ L3 programming layer <2022-07-04> (C:\Users\manca\AppData\Local\Programs\MiKTeX\
 Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
 (C:\Users\manca\AppData\Local\Programs\MiKTeX\tex/latex/base\size12.clo
 File: size12.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
+=======
+**"/Users/aljadostal/Documents/faks/prvi mag/Risk Management/Hedging Strategy (januar, po 4, 40)/Design-and-implementation-of-a-hedging-strategy/rm.tex"
+(/Users/aljadostal/Documents/faks/prvi mag/Risk Management/Hedging Strategy (januar, po 4, 40)/Design-and-implementation-of-a-hedging-strategy/rm.tex
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-01-18>
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2024/06/29 v1.4n Standard LaTeX file (size option)
+>>>>>>> 7ae197042392ec37afc5bc6cfe996daa9af49238
 )
 \c@part=\count185
 \c@section=\count186
@@ -702,37 +717,58 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 30.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
+<<<<<<< HEAD
 {C:/Users/manca/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2]
 Overfull \hbox (0.24144pt too wide) in paragraph at lines 117--117
+=======
+[1
+
+{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+
+[2]
+Overfull \hbox (0.24144pt too wide) in paragraph at lines 112--112
+>>>>>>> 7ae197042392ec37afc5bc6cfe996daa9af49238
 |[]\OT1/cmr/bx/n/17.28 Simulation of EBIT and com-par-i-son with the point
  []
 
 [3]
 
+<<<<<<< HEAD
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [4] [5] [6] [7]
+=======
+[4]
 
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 303.
+[5]
 
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 303.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 303.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 303.
-
+[6]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+
+
+[7]
+>>>>>>> 7ae197042392ec37afc5bc6cfe996daa9af49238
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 295.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 295.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 295.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 295.
+
 [8]
 
+<<<<<<< HEAD
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [9] [10]
@@ -740,16 +776,28 @@ Underfull \hbox (badness 10000) in paragraph at lines 422--424
 
  []
 
-[11]
-Underfull \hbox (badness 10000) in paragraph at lines 501--504
+=======
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 414--416
 
  []
 
 
+
+[10]
+
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 524--525
+
+>>>>>>> 7ae197042392ec37afc5bc6cfe996daa9af49238
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 493--496
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 516--517
 
  []
 
@@ -758,6 +806,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [12]
 
+<<<<<<< HEAD
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [13]
@@ -771,15 +820,41 @@ Overfull \hbox (30.73952pt too wide) in paragraph at lines 690--699
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
+=======
+[13]
+
+[14]
+
+[15]
+
+[16] (./rm.aux)
+ ***********
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-01-18>
+ ***********
+
+
+LaTeX Warning: There were undefined references.
+>>>>>>> 7ae197042392ec37afc5bc6cfe996daa9af49238
 
 [16] [17] (rm.aux)
 Package rerunfilecheck Info: File `rm.out' has not changed.
+<<<<<<< HEAD
 (rerunfilecheck)             Checksum: 536512E434E2FBA657299C120715C57E;11290.
+=======
+(rerunfilecheck)             Checksum: 1122DEBE64AB8FB8E007357650F5ED30;11290.
+
+Package biblatex Warning: Please (re)run Biber on the file:
+(biblatex)                rm
+(biblatex)                and rerun LaTeX afterwards.
+
+>>>>>>> 7ae197042392ec37afc5bc6cfe996daa9af49238
 Package logreq Info: Writing requests to 'rm.run.xml'.
 \openout1 = `rm.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
+<<<<<<< HEAD
  22892 strings out of 478338
  448977 string characters out of 2836700
  1159566 words of memory out of 3000000
@@ -792,5 +867,20 @@ Output written on rm.pdf (17 pages, 226939 bytes).
 PDF statistics:
  379 PDF objects out of 1000 (max. 8388607)
  79 named destinations out of 1000 (max. 500000)
+=======
+ 23330 strings out of 473190
+ 457007 string characters out of 5715799
+ 1274840 words of memory out of 5000000
+ 46285 multiletter control sequences out of 15000+600000
+ 568905 words of font info for 74 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 75i,13n,81p,1086b,1779s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on rm.pdf (16 pages, 188008 bytes).
+PDF statistics:
+ 377 PDF objects out of 1000 (max. 8388607)
+ 331 compressed objects within 4 object streams
+ 75 named destinations out of 1000 (max. 500000)
+>>>>>>> 7ae197042392ec37afc5bc6cfe996daa9af49238
  361 words of extra memory for PDF output out of 10000 (max. 10000000)
 
