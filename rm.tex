@@ -627,21 +627,41 @@ The primary benefit of the IRS is the elimination of "interest rate shock" risk,
 
 \section{Extension to a Two-Commodity Exposure Framework}
 
-This section extends the baseline analysis to a setting in which the firm is exposed to two traded commodities. At current prices, 57\% of the sales price is linked to copper, while an additional 15\% is linked to aluminium. Other variable material costs represent 5\% of sales, with all remaining profit and loss components unchanged relative to the initial specification.
+This section extends the baseline analysis to a setting in which the firm is exposed to two traded commodities. At current prices, 57\% of the sales price is linked to copper, while an additional 15\% is linked to aluminium. Aluminium price data were obtained from Yahoo Finance, where aluminium is quoted in USD per metric ton. Consequently, no additional unit conversion was required when constructing the aluminium material cost and futures price series.
+Other variable material costs represent 5\% of sales, with all remaining profit and loss components unchanged relative to the initial specification.
 
 \subsection{Commodity Price Dynamics and Cost Correlation}
 
-Monthly spot price data are used for both commodities over the common sample period from November 2010 to June 2025. Material cost time series are constructed by scaling commodity prices such that their levels match the respective cost shares at current prices.
+Monthly spot price data are used for both commodities over the common sample period from November 2010 to June 2025. Futures price data for copper were obtained at a monthly frequency covering the period from February 2006 to December 2025. In contrast, aluminium futures prices were sourced at a daily frequency from May 2014 to November 2025. To ensure consistency with the analysis framework, all series were aligned to a common monthly frequency using end-of-period observations.
+Material cost time series are constructed by scaling commodity prices such that their levels match the respective cost shares at current prices.
 
 The correlation between copper and aluminium spot prices equals 0.886, indicating a strong positive co-movement. When expressed in terms of changes in material costs, the correlation remains high at 0.819. This implies that while some diversification benefits arise from the use of two commodities, overall material cost risk remains substantial and cannot be eliminated through diversification alone.
+
 
 \subsection{EBIT Simulation Under Alternative Sales Assumptions}
 
 EBIT is simulated under three alternative sales assumptions: (i) fixed sales, (ii) partial price pass-through with a sales--commodity correlation of 0.74, and (iii) a higher pass-through scenario with correlation 0.92. The point estimate of EBIT based on current prices amounts to USD 5.8 million and serves as a benchmark for the simulated distributions.
 
+
+
 \subsection{Unhedged EBIT Risk in the Two-Commodity Case}
 
 The unhedged EBIT distributions exhibit significant downside risk across all sales scenarios. At the 5\% confidence level, EBIT Value-at-Risk and Expected Tail Loss are particularly pronounced in the presence of sales pass-through. In the fixed-sales scenario, the 5\% VaR and ETL equal USD --47.7 million and USD --76.4 million, respectively. When sales are correlated with commodity prices, downside risk increases sharply, with VaR reaching USD --367 million for $\rho=0.74$ and USD --244 million for $\rho=0.92$. These results confirm that exposure to multiple correlated commodities constitutes a major source of earnings volatility.
+
+\begin{table}[h]
+\centering
+\caption{Unhedged EBIT risk measures in the two-commodity case}
+\begin{tabular}{lcc}
+\hline
+Scenario & VaR$_{5\%}$ (USD million) & ETL$_{5\%}$ (USD million) \\
+\hline
+Fixed sales & --47.7 & --76.4 \\
+Sales correlation $\rho=0.74$ & --367.0 & --406.0 \\
+Sales correlation $\rho=0.92$ & --244.0 & --281.0 \\
+\hline
+\end{tabular}
+\end{table}
+
 
 \subsection{Two-Commodity Hedging Strategy}
 
@@ -653,17 +673,47 @@ where $\Sigma_{FF}$ denotes the variance--covariance matrix of futures price cha
 
 The estimated hedge ratios equal
 \[
-h_{\text{Copper}} = 34{,}004 \quad \text{and} \quad h_{\text{Aluminium}} = 41.5,
+h_{\text{Copper}} = 35237.46  \quad \text{and} \quad h_{\text{Aluminium}} = 76410.75 
 \]
-reflecting the dominant contribution of copper exposure to overall cost risk, consistent with its larger share in total material costs.
+reflecting differences in price scales and volatilities across the two futures instruments, rather than hedging intensity per se.
+
+
+
+
 
 \subsection{Impact of Hedging on EBIT Risk}
 
-The introduction of the two-instrument hedging strategy leads to a clear reduction in downside EBIT risk. In the fixed-sales scenario, the 5\% EBIT VaR improves from USD --47.7 million in the unhedged case to USD --53.4 million after hedging, while the corresponding ETL improves to USD --88.1 million. Hedging effects remain economically meaningful under both sales pass-through scenarios, although absolute risk levels remain higher due to the positive co-movement between revenues and commodity prices.
+The introduction of the two-instrument hedging strategy alters the distribution of EBIT outcomes, with its effectiveness depending on the degree of sales pass-through. In the fixed-sales scenario, the 5\% EBIT VaR improves from USD --47.7 million in the unhedged case to USD --53.4 million after hedging, while the corresponding ETL improves to USD --88.1 million. Hedging effects remain economically meaningful under both sales pass-through scenarios, although absolute risk levels remain higher due to the positive co-movement between revenues and commodity prices.
+\begin{table}[h]
+\centering
+\caption{Impact of two-commodity hedging on EBIT risk}
+\begin{tabular}{lcccc}
+\hline
+Scenario & VaR$_{5\%}$ unhedged & VaR$_{5\%}$ hedged & ETL$_{5\%}$ unhedged & ETL$_{5\%}$ hedged \\
+\hline
+Fixed sales & --47.7 & --53.4 & --76.4 & --88.1 \\
+Sales corr. $\rho=0.74$ & --367.0 & --367.0 & --406.0 & --412.0 \\
+Sales corr. $\rho=0.92$ & --244.0 & --245.0 & --281.0 & --282.0 \\
+\hline
+\end{tabular}
+\end{table}
 
 \subsection{Sensitivity to Derivative--Cost Correlation}
 
 To assess the robustness of the hedging strategy, the analysis is repeated under alternative assumptions regarding the correlation between derivative instruments and material costs. As expected, higher correlations lead to stronger reductions in EBIT VaR and ETL, while lower correlations introduce basis risk and reduce hedge effectiveness. For instance, when the derivative--cost correlation increases from 0.60 to 0.75, EBIT VaR improves from USD --62.0 million to USD --50.0 million, accompanied by a corresponding improvement in ETL. These findings are consistent with the sensitivity results obtained in the single-commodity case.
+\begin{table}[h]
+\centering
+\caption{Sensitivity of EBIT risk to derivative--cost correlation}
+\begin{tabular}{lcc}
+\hline
+Derivative--cost correlation & VaR$_{5\%}$ (USD million) & ETL$_{5\%}$ (USD million) \\
+\hline
+0.60 & --62.0 & --91.5 \\
+0.75 & --50.0 & --85.5 \\
+0.90 & --53.6 & --84.7 \\
+\hline
+\end{tabular}
+\end{table}
 
 \subsection{Discussion and Managerial Implications}
 
