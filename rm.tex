@@ -250,16 +250,16 @@ Copper futures (HG=F) are quoted in USD per pound. Prices are converted to USD p
 \[
 1~\text{metric ton} = 2204.6226~\text{lb}, \qquad F^{\text{ton}}_t = F^{\text{lb}}_t \cdot 2204.6226.
 \]
-A standard contract covers $25{,}000$ lb, corresponding to approximately $11.3398$ metric tons.
+A standard contract covers $25000$ lb, corresponding to approximately $11.3398$ metric tons.
 
 \subsection{Implementation note: synthetic derivative construction in Parts 5 and 6}
-Two slightly different constructions are used in the code. In Part 5, the derivative \emph{changes} are generated as a linear combination
+Two slightly different constructions are used in the code. In Part 5, the derivative changes are generated as a linear combination
 \[
 \Delta D_t = \rho \, \Delta CM_t + \sqrt{1-\rho^2}\,\varepsilon_t,
 \]
-with $\varepsilon_t$ drawn from a normal distribution scaled to the volatility of $\Delta CM_t$. Because the sample is finite and the noise is not explicitly orthogonalized to $\Delta CM_t$, the realized \emph{sample} correlation can deviate from the target; in the reported run, the target is $0.75$ but the realized sample correlation equals $0.717$.
+with $\varepsilon_t$ drawn from a normal distribution scaled to the volatility of $\Delta CM_t$. Because the sample is finite and the noise is not explicitly orthogonalized to $\Delta CM_t$, the realized sample correlation can deviate from the target; in the reported run, the target is $0.75$ but the realized sample correlation equals $0.717$.
 
-In Part 6, the derivative changes are generated using an orthogonalization step that removes the projection of the random noise on standardized cost changes. This construction ensures that the realized \emph{sample} correlation matches the target correlation levels (0.60, 0.75, 0.90) much more tightly, which is preferable for a clean correlation sensitivity analysis.
+In Part 6, the derivative changes are generated using an orthogonalization step that removes the projection of the random noise on standardized cost changes. This construction ensures that the realized sample correlation matches the target correlation levels (0.60, 0.75, 0.90) much more tightly, which is preferable for a clean correlation sensitivity analysis.
 
 \section{Results for Parts 5 and 6}
 
@@ -322,7 +322,7 @@ b) $\rho=0.92$ & hedged (deriv corr$\sim$0.75) & 0.05 & 20.8 & 8.70 \\
 Relative to the futures hedge, the synthetic derivative hedge behaves differently. In the fixed-sales case, VaR and ETL increase slightly (from $28.6$ to $28.9$ and from $12.6$ to $13.5$), indicating a modest improvement in the left tail of EBIT. In the $\rho=0.74$ operating case, the derivative hedge improves VaR substantially (from $-38.2$ to $-31.1$), but ETL becomes more negative (from $-53.9$ to $-57.0$), which means that extremely adverse outcomes in the far tail remain severe and can even worsen. In the high revenue--commodity correlation case ($\rho=0.92$), hedging lowers both VaR and ETL, reinforcing the interpretation that the firm already has a strong natural hedge through revenues and that financial hedging can remove beneficial co-movement between revenues and costs.
 
 \subsection{Correlation sensitivity analysis (synthetic derivative)}
-Part 6 repeats the derivative hedge for correlations $\rho_{\text{deriv}}\in\{0.60,0.75,0.90\}$. Derivative changes are constructed so that their \emph{sample} correlation with $\Delta CM$ equals the target correlation, and the volatility is scaled to be comparable across correlation levels.
+Part 6 repeats the derivative hedge for correlations $\rho_{\text{deriv}}\in\{0.60,0.75,0.90\}$. Derivative changes are constructed so that their sample correlation with $\Delta CM$ equals the target correlation, and the volatility is scaled to be comparable across correlation levels.
 
 To evaluate hedge quality on the cost exposure alone, hedge effectiveness is computed as
 \[
